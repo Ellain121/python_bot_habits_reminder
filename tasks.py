@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 
 
 def daily_goal_to_str(daily_goal: int):
@@ -28,10 +29,11 @@ class DatabaseManager:
             self.habits.append(Habit(*db_habit))
 
         res = cur.execute(
-            f"SELECT id_{', id_'.join(str(habit.id) for habit in self.habits)} FROM habits_data WHERE date='2024-06-09'")
+            f"SELECT id_{', id_'.join(str(habit.id) for habit in self.habits)} FROM habits_data WHERE date='{datetime.today().strftime('%Y-%m-%d')}'")
         daily_results = res.fetchall()[0]
         for i in range(len(daily_results)):
             self.habits[i].daily_result = daily_results[i]
+            print(daily_results[i])
 
     def get_habits(self):
         return self.habits
