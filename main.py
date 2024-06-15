@@ -27,8 +27,6 @@ bot = Bot(token=my_token_unsecure.Token)
 dp = Dispatcher()
 router = Router()
 
-db = DB()
-
 morning_H = 8
 evening_H = 22
 after_evening_H = 23
@@ -53,7 +51,7 @@ async def progress_cmd(message: Message):
 
 
 async def start_day():
-    habits_list: str = db.get_habits_str()
+    habits_list: str = DB().get_habits_str()
     habits_list = "`**Tasks for today:**\n\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\n`" + habits_list
     await bot.send_message(my_user_id.user_id, habits_list, parse_mode='MarkdownV2')
 
@@ -63,7 +61,7 @@ async def end_of_day_notify():
 
 
 async def end_of_day():
-    habits_list: str = db.get_habits_full_str()
+    habits_list: str = DB().get_habits_full_str()
     habits_list = "`**Today results:**\n\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\n`" + habits_list
     await bot.send_message(my_user_id.user_id, habits_list, parse_mode='MarkdownV2')
 
