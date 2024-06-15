@@ -43,7 +43,7 @@ def get_time_H():
 
 @router.message(Command("progress"))
 async def progress_cmd(message: Message):
-    habits_list: str = db.get_habits_full_str()
+    habits_list: str = DB().get_habits_full_str()
     habits_list = "**Current results:**\n`\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\n`" + habits_list
     await message.answer(habits_list, parse_mode="MarkdownV2")
 
