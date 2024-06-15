@@ -1,5 +1,7 @@
 import my_token_unsecure
 from aiogram import Bot, Dispatcher, F, Router
+from aiogram.filters import Command
+from aiogram.types import Message
 import asyncio
 from datetime import datetime
 import os
@@ -38,7 +40,16 @@ after_evening_H = 23
 def get_time_H():
     return int(datetime.now().strftime("%H"))
 
-##########################
+### Router functions ###
+
+
+@router.message(Command("progress"))
+async def progress_cmd(message: Message):
+    habits_list: str = db.get_habits_full_str()
+    habits_list = "**Current results:**\n`\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\=\n`" + habits_list
+    await message.answer(habits_list, parse_mode="MarkdownV2")
+
+    ##########################
 
 
 async def start_day():
