@@ -1,5 +1,8 @@
 import sqlite3
+import os
 from datetime import datetime
+
+project_path = os.path.realpath(__file__)
 
 
 def daily_goal_to_str(daily_goal: int):
@@ -19,7 +22,7 @@ class Habit:
 
 class DatabaseManager:
     def __init__(self):
-        con = sqlite3.connect("./data/habits.db")
+        con = sqlite3.connect(project_path + "/data/habits.db")
         cur = con.cursor()
         res = cur.execute("SELECT id, name, dailyGoal FROM habits_id")
         db_habits = res.fetchall()
