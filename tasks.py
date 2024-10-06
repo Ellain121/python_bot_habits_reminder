@@ -2,7 +2,7 @@ import sqlite3
 import os
 from datetime import datetime
 
-project_path = os.path.realpath(__file__)
+project_path = os.path.dirname(os.path.realpath(__file__))
 
 
 def daily_goal_to_str(daily_goal: int):
